@@ -39,7 +39,7 @@ while True:
         if amount <= balance:
 
             balance -= amount
-            transactions.append(f"Withdrew: {amount}")
+            transactions.append(f"Withdrew: ${amount}")
             with open("transactions.txt", "a") as f:
                 f.write(f"Withdrew: ${amount}\n")
             print("Withdrawal successful.")
