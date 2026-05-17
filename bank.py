@@ -25,7 +25,11 @@ while True:
         balance += amount
         
         transactions.append(f"Deposited: ${amount}")
-
+        
+        with open("transactions.txt", "a") as f:
+            f.write(f"Deposited: ${amount}\n")
+        
+    
         print("Deposit successful.")
 
     elif choice == "3":
@@ -36,19 +40,19 @@ while True:
 
             balance -= amount
             transactions.append(f"Withdrew: {amount}")
-
+            with open("transactions.txt", "a") as f:
+                f.write(f"Withdrew: ${amount}\n")
             print("Withdrawal successful.")
+
         else:
             print("Insufficient funds.")
-            
+
     elif choice == "4":
 
         print("\nTransactions:")
         if len(transactions) == 0:
             print("No transactions yet.")
-
         else:
-
             for item in transactions:
                 print(item)
 
