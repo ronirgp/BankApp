@@ -1,5 +1,7 @@
 print("Welcome to the Bank")
 
+transactions = []
+
 try:
     with open("balance.txt", "r") as file:
         balance = float(file.read())
