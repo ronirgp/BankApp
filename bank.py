@@ -1,7 +1,10 @@
 print("Welcome to the Bank")
 
-balance = 1000
-transactions = []
+try:
+    with open("balance.txt", "r") as file:
+        balance = float(file.read())
+except:
+    balance = 1000
 
 while True:
 
@@ -23,6 +26,8 @@ while True:
         amount = float(input("Enter deposit amount: "))
 
         balance += amount
+        with open("balance.txt", "w") as file:
+            file.write(str(balance))
         
         transactions.append(f"Deposited: ${amount}")
         
@@ -39,6 +44,10 @@ while True:
         if amount <= balance:
 
             balance -= amount
+            with open("balance.txt", "w") as file:
+                file.write(str(balance))
+            
+            
             transactions.append(f"Withdrew: ${amount}")
             with open("transactions.txt", "a") as f:
                 f.write(f"Withdrew: ${amount}\n")
