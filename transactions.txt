@@ -3,3 +3,6 @@ Deposited: $500.0
 Withdrew: $100.0
 Withdrew: $300.0
 Deposited: $400.0
+Deposited: $300.0
+Deposited: $500.0
+Deposited: $1000.0
