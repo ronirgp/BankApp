@@ -1,23 +1,37 @@
 print("Welcome to the Bank")
 
 transactions = []
-username = "Ronald"
-password = "1234"
+
+users = {
+    "Ronald": {
+        "password": "1234",
+        "balance": 1000
+    },
+
+    "Maria": {
+        "password": "abcd",
+        "balance": 2500
+    }
+}
 
 entered_username = input("Enter username: ")
 entered_password = input("Enter password: ")
 
-if entered_username == username and entered_password == password:
-    print("Login successful!")
-else:
-    print("Wrong username or password.")
-    exit()
+if entered_username in users:
 
-try:
-    with open("balance.txt", "r") as file:
-        balance = float(file.read())
-except:
-    balance = 1000
+    if users[entered_username]["password"] == entered_password:
+
+        print("Login successful!")
+
+        balance = users[entered_username]["balance"]
+
+    else:
+        print("Wrong password.")
+        exit()
+
+else:
+    print("User not found.")
+    exit()
 
 while True:
 
@@ -38,16 +52,11 @@ while True:
 
         amount = float(input("Enter deposit amount: "))
 
-        balance += amount
-        with open("balance.txt", "w") as file:
-            file.write(str(balance))
-        
+        users[entered_username]["balance"] += amount
+        balance = users[entered_username]["balance"]
+
         transactions.append(f"Deposited: ${amount}")
-        
-        with open("transactions.txt", "a") as f:
-            f.write(f"Deposited: ${amount}\n")
-        
-    
+
         print("Deposit successful.")
 
     elif choice == "3":
@@ -56,14 +65,11 @@ while True:
 
         if amount <= balance:
 
-            balance -= amount
-            with open("balance.txt", "w") as file:
-                file.write(str(balance))
-            
-            
+            users[entered_username]["balance"] -= amount
+            balance = users[entered_username]["balance"]
+
             transactions.append(f"Withdrew: ${amount}")
-            with open("transactions.txt", "a") as f:
-                f.write(f"Withdrew: ${amount}\n")
+
             print("Withdrawal successful.")
 
         else:
@@ -72,8 +78,10 @@ while True:
     elif choice == "4":
 
         print("\nTransactions:")
+
         if len(transactions) == 0:
             print("No transactions yet.")
+
         else:
             for item in transactions:
                 print(item)
