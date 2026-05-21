@@ -1,6 +1,17 @@
 print("Welcome to the Bank")
 
 transactions = []
+username = "Ronald"
+password = "1234"
+
+entered_username = input("Enter username: ")
+entered_password = input("Enter password: ")
+
+if entered_username == username and entered_password == password:
+    print("Login successful!")
+else:
+    print("Wrong username or password.")
+    exit()
 
 try:
     with open("balance.txt", "r") as file:
