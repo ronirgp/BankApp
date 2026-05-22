@@ -59,6 +59,15 @@ while True:
         transactions.append(f"Deposited: ${amount}")
 
         print("Deposit successful.")
+        
+        with open("receipt.txt", "w") as receipt:
+            
+            receipt.write("----- RECEIPT -----\n")
+            receipt.write(f"User: {entered_username}\n")
+            receipt.write("Transaction: Deposit\n")
+            receipt.write(f"Amount: ${amount}\n")
+            receipt.write(f"Balance: ${balance}\n")
+            receipt.write("-------------------\n")    
 
     elif choice == "3":
 
@@ -72,6 +81,13 @@ while True:
             transactions.append(f"Withdrew: ${amount}")
 
             print("Withdrawal successful.")
+            with open("receipt.txt", "w") as receipt:
+                receipt.write("----- RECEIPT -----\n")
+                receipt.write(f"User: {entered_username}\n")
+                receipt.write("Transaction: Withdrawal\n")
+                receipt.write(f"Amount: ${amount}\n")
+                receipt.write(f"Balance: ${balance}\n")
+                receipt.write("-------------------\n")
 
         else:
             print("Insufficient funds.")
