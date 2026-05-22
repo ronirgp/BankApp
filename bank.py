@@ -88,7 +88,6 @@ while True:
                 receipt.write(f"Amount: ${amount}\n")
                 receipt.write(f"Balance: ${balance}\n")
                 receipt.write("-------------------\n")
-
         else:
             print("Insufficient funds.")
 
@@ -134,7 +133,15 @@ while True:
                     
 
                     print("Transfer successful.")
-                    
+                    with open("receipt.txt", "w") as receipt:
+
+                        receipt.write("----- RECEIPT -----\n")
+                        receipt.write(f"Sender: {entered_username}\n")
+                        receipt.write(f"Receiver: {receiver}\n")
+                        receipt.write("Transaction: Transfer\n")
+                        receipt.write(f"Amount: ${amount}\n")
+                        receipt.write(f"Balance: ${balance}\n")
+                        receipt.write("-------------------\n")
 
             else:
                 print("Insufficient funds.")
