@@ -40,7 +40,8 @@ while True:
     print("2. Deposit")
     print("3. Withdraw")
     print("4. View Transactions")
-    print("5. Exit")
+    print("5. Transfer Money")
+    print("6. Exit")
 
     choice = input("Choose: ")
 
@@ -87,10 +88,50 @@ while True:
                 print(item)
 
     elif choice == "5":
+        
+
+        receiver = input("Enter receiver username: ")
+        
+
+        if receiver in users:
+            
+
+            amount = float(input("Enter transfer amount: "))
+            
+
+            if amount <= balance:
+                
+
+                users[entered_username]["balance"] -= amount
+                
+                users[receiver]["balance"] += amount
+                
+
+                balance = users[entered_username]["balance"]
+
+                transactions.append(f"Transferred ${amount} to {receiver}")
+                
+
+                with open("transactions.txt", "a") as f:
+                    
+                    f.write(f"{entered_username} transferred ${amount} to {receiver}\n")
+                    
+
+                    print("Transfer successful.")
+                    
+
+            else:
+                print("Insufficient funds.")
+                
+        else:
+            print("User not found.")
+            
+
+    elif choice == "6":
 
         print("Goodbye")
         break
 
-    else:
+else:
 
-        print("Invalid option")
+    print("Invalid option")
