@@ -2,6 +2,6 @@
 Sender: Maria
 Receiver: Ronald
 Transaction: Transfer
-Amount: $1000.0
-Balance: $1400.0
+Amount: $100.0
+Balance: $2300.0
 -------------------

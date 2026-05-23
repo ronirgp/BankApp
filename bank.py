@@ -35,19 +35,23 @@ else:
 
 while True:
 
-    print("\nMENU")
+    print("\n==============================")
+    print("       BANK SYSTEM MENU")
+    print("==============================")
     print("1. Show Balance")
-    print("2. Deposit")
-    print("3. Withdraw")
+    print("2. Deposit Money")
+    print("3. Withdraw Money")
     print("4. View Transactions")
     print("5. Transfer Money")
     print("6. Exit")
-
+    print("==============================")
     choice = input("Choose: ")
 
     if choice == "1":
 
-        print("Balance:", balance)
+        print("\n==============================")
+        print(f"Current Balance: ${balance}")
+        print("==============================")
 
     elif choice == "2":
 
@@ -58,7 +62,7 @@ while True:
 
         transactions.append(f"Deposited: ${amount}")
 
-        print("Deposit successful.")
+        print("\n✅ Deposit successful.")
         
         with open("receipt.txt", "w") as receipt:
             
@@ -80,7 +84,8 @@ while True:
 
             transactions.append(f"Withdrew: ${amount}")
 
-            print("Withdrawal successful.")
+            print("\n✅ Withdrawal successful.")
+            
             with open("receipt.txt", "w") as receipt:
                 receipt.write("----- RECEIPT -----\n")
                 receipt.write(f"User: {entered_username}\n")
@@ -132,7 +137,8 @@ while True:
                     f.write(f"{entered_username} transferred ${amount} to {receiver}\n")
                     
 
-                    print("Transfer successful.")
+                    print("\n✅ Transfer successful.")
+                    
                     with open("receipt.txt", "w") as receipt:
 
                         receipt.write("----- RECEIPT -----\n")
@@ -144,10 +150,10 @@ while True:
                         receipt.write("-------------------\n")
 
             else:
-                print("Insufficient funds.")
+                print("\n❌ Insufficient funds.")
                 
         else:
-            print("User not found.")
+            print("\n❌ User not found.")
             
 
     elif choice == "6":
