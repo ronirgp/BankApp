@@ -2,17 +2,32 @@ print("Welcome to the Bank")
 
 transactions = []
 
-users = {
-    "Ronald": {
-        "password": "1234",
-        "balance": 1000
-    },
+users = {}
 
-    "Maria": {
-        "password": "abcd",
-        "balance": 2500
-    }
-}
+with open("users.txt", "r") as file:
+
+    for line in file:
+
+        data = line.strip().split(",")
+
+        username = data[0]
+        password = data[1]
+        balance = float(data[2])
+
+        users[username] = {
+            "password": password,
+            "balance": balance
+        }
+        
+def save_users():
+
+    with open("users.txt", "w") as file:
+        for username in users:
+
+            password = users[username]["password"]
+            balance = users[username]["balance"]
+
+            file.write(f"{username},{password},{balance}\n")
 
 entered_username = input("Enter username: ")
 entered_password = input("Enter password: ")
@@ -59,7 +74,8 @@ while True:
 
         users[entered_username]["balance"] += amount
         balance = users[entered_username]["balance"]
-
+        save_users()
+        
         transactions.append(f"Deposited: ${amount}")
 
         print("\n✅ Deposit successful.")
@@ -81,7 +97,7 @@ while True:
 
             users[entered_username]["balance"] -= amount
             balance = users[entered_username]["balance"]
-
+            save_users()
             transactions.append(f"Withdrew: ${amount}")
 
             print("\n✅ Withdrawal successful.")
@@ -128,6 +144,7 @@ while True:
                 
 
                 balance = users[entered_username]["balance"]
+                save_users()
 
                 transactions.append(f"Transferred ${amount} to {receiver}")
                 
