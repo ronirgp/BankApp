@@ -60,6 +60,7 @@ while True:
     print("5. Transfer Money")
     print("6. Exit")
     print("7. Create New Account")
+    print("8. Delete Account")
     print("==============================")
     choice = input("Choose: ")
 
@@ -194,6 +195,30 @@ while True:
 
             print("\n✅ Account created successfully.")
             
+    elif choice == "8":
+
+        username_to_delete = input("Enter account username to delete: ")
+
+        if username_to_delete in users:
+
+            confirm = input("Type YES to confirm deletion: ")
+
+            if confirm == "YES":
+
+                del users[username_to_delete]
+
+                save_users()
+
+                print("\n✅ Account deleted successfully.")
+
+            else:
+
+                print("\n❌ Deletion cancelled.")
+
+        else:
+
+            print("\n❌ User not found.")
+            
             
 
     elif choice == "6":
@@ -201,6 +226,6 @@ while True:
         print("Goodbye")
         break
 
-else:
+    else:
 
-    print("Invalid option")
+        print("Invalid option")
