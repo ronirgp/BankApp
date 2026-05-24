@@ -1,6 +1,7 @@
 ----- RECEIPT -----
-User: Maria
-Transaction: Deposit
-Amount: $100.0
-Balance: $3100.0
+Sender: admin
+Receiver: Kim
+Transaction: Transfer
+Amount: $200.0
+Balance: $800.0
 -------------------

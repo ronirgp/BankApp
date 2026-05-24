@@ -20,6 +20,7 @@ with open("users.txt", "r") as file:
         }
         
 def save_users():
+    print("Saving users...")
 
     with open("users.txt", "w") as file:
         for username in users:
@@ -61,7 +62,9 @@ while True:
     print("6. Exit")
     print("7. Create New Account")
     print("8. Delete Account")
+    print("9. Admin Panel")
     print("==============================")
+    
     choice = input("Choose: ")
 
     if choice == "1":
@@ -196,6 +199,7 @@ while True:
             print("\n✅ Account created successfully.")
             
     elif choice == "8":
+        
 
         username_to_delete = input("Enter account username to delete: ")
 
@@ -225,6 +229,32 @@ while True:
 
         print("Goodbye")
         break
+    
+    elif choice == "9":
+
+        if entered_username == "admin":
+
+            print("\n========================")
+            print("      ADMIN PANEL")
+            print("========================")
+
+            print("\nRegistered Users:")
+
+            for username in users:
+
+                print(username)
+
+            total_money = 0
+
+            for username in users:
+
+                total_money += users[username]["balance"]
+
+            print(f"\nTotal money in bank: ${total_money}")
+
+        else:
+
+            print("\n❌ Access denied. Admin only.")
 
     else:
 

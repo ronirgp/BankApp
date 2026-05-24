@@ -1,4 +1,5 @@
-Ronald,1234,1500.0
-Maria,abcd,3100.0
-Carlos,9999,1400.0
-Gustavo,4445,0.0
+admin,admin123,800.0
+Ronald,1234,1600.0
+Maria,abcd,3700.0
+Carlos,9999,1900.0
+Kim,kristalrgp,200.0
