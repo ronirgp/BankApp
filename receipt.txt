@@ -1,6 +1,6 @@
 ----- RECEIPT -----
-User: Maria
+User: Carlos
 Transaction: Deposit
-Amount: $200.0
-Balance: $2900.0
+Amount: $500.0
+Balance: $1000.0
 -------------------

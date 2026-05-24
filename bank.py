@@ -59,6 +59,7 @@ while True:
     print("4. View Transactions")
     print("5. Transfer Money")
     print("6. Exit")
+    print("7. Create New Account")
     print("==============================")
     choice = input("Choose: ")
 
@@ -170,7 +171,29 @@ while True:
                 print("\n❌ Insufficient funds.")
                 
         else:
-            print("\n❌ User not found.")
+                print("\n❌ User not found.")
+            
+    elif choice == "7":
+
+        new_username = input("Create username: ")
+    
+        if new_username in users:
+
+            print("\n❌ Username already exists.")
+
+        else:
+
+            new_password = input("Create password: ")
+
+            users[new_username] = {
+                "password": new_password,
+                "balance": 0
+                }
+
+            save_users()
+
+            print("\n✅ Account created successfully.")
+            
             
 
     elif choice == "6":

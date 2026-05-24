@@ -1,2 +1,3 @@
-Ronald,1234,1800.0
-Maria,abcd,2900.0
+Ronald,1234,1900.0
+Maria,abcd,3000.0
+Carlos,9999,1000.0

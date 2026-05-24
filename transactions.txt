@@ -25,3 +25,6 @@ Maria transferred $500.0 to Ronald
 Ronald transferred $500.0 to Maria
 Maria transferred $500.0 to Ronald
 Ronald transferred $200.0 to Maria
+Ronald transferred $300.0 to Carlos
+Carlos transferred $500.0 to Maria
+Maria transferred $400.0 to Ronald
