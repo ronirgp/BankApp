@@ -40,6 +40,7 @@ if entered_username in users:
         print("Login successful!")
 
         balance = users[entered_username]["balance"]
+        transaction_file = f"{entered_username}_transactions.txt"
 
     else:
         print("Wrong password.")
@@ -82,6 +83,9 @@ while True:
         save_users()
         
         transactions.append(f"Deposited: ${amount}")
+        with open(transaction_file, "a") as f:
+
+            f.write(f"Deposited ${amount} | Balance: ${balance}\n")
 
         print("\n✅ Deposit successful.")
         
@@ -104,6 +108,10 @@ while True:
             balance = users[entered_username]["balance"]
             save_users()
             transactions.append(f"Withdrew: ${amount}")
+            
+            with open(transaction_file, "a") as f:
+
+                f.write(f"Withdrew ${amount} | Balance: ${balance}\n")
 
             print("\n✅ Withdrawal successful.")
             
@@ -119,14 +127,23 @@ while True:
 
     elif choice == "4":
 
-        print("\nTransactions:")
+        print("\n===== TRANSACTION HISTORY =====")
 
-        if len(transactions) == 0:
+        try:
+
+            with open(transaction_file, "r") as f:
+
+                history = f.read()
+
+                if history == "":
+                    print("No transactions yet.")
+
+                else:
+                    print(history)
+
+        except FileNotFoundError:
+
             print("No transactions yet.")
-
-        else:
-            for item in transactions:
-                print(item)
 
     elif choice == "5":
         
@@ -154,7 +171,7 @@ while True:
                 transactions.append(f"Transferred ${amount} to {receiver}")
                 
 
-                with open("transactions.txt", "a") as f:
+                with open(transaction_file, "a") as f:
                     
                     f.write(f"{entered_username} transferred ${amount} to {receiver}\n")
                     
