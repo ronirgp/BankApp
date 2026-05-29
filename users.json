@@ -1,0 +1,14 @@
+{
+    "admin": {
+        "password": "admin123",
+        "balance": 500
+    },
+    "Ronald": {
+        "password": "1234",
+        "balance": 1600.0
+    },
+    "Maria": {
+        "password": "abcd",
+        "balance": 3000.0
+    }
+}

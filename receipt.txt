@@ -1,6 +1,7 @@
 ----- RECEIPT -----
-User: Carlos
-Transaction: Deposit
-Amount: $500.0
+Sender: Maria
+Receiver: Ronald
+Transaction: Transfer
+Amount: $100.0
 Balance: $3000.0
 -------------------

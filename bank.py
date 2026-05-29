@@ -1,25 +1,21 @@
+import json 
+
 print("Welcome to the Bank")
 
 transactions = []
 
 users = {}
 
-with open("users.txt", "r") as file:
+with open("users.json", "r") as file:
 
-    for line in file:
-
-        data = line.strip().split(",")
-
-        username = data[0]
-        password = data[1]
-        balance = float(data[2])
-
-        users[username] = {
-            "password": password,
-            "balance": balance
-        }
+    users = json.load(file)
         
 def save_users():
+
+    with open("users.json", "w") as file:
+
+        json.dump(users, file, indent=4)
+    
     print("Saving users...")
 
     with open("users.txt", "w") as file:
