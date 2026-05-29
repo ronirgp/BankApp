@@ -1,7 +1,7 @@
 {
     "admin": {
         "password": "admin123",
-        "balance": 500
+        "balance": 1000.0
     },
     "Ronald": {
         "password": "1234",

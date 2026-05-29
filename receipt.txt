@@ -1,7 +1,7 @@
 ----- RECEIPT -----
-Sender: Maria
-Receiver: Ronald
+Sender: admin
+Receiver: Carlos
 Transaction: Transfer
-Amount: $100.0
-Balance: $3000.0
+Amount: $500.0
+Balance: $1000.0
 -------------------
