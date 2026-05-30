@@ -10,5 +10,9 @@
     "Maria": {
         "password": "abcd",
         "balance": 3000.0
+    },
+    "Carlos": {
+        "password": "9999",
+        "balance": 0
     }
 }

@@ -1,3 +1,4 @@
 admin,admin123,1000.0
 Ronald,1234,1600.0
 Maria,abcd,3000.0
+Carlos,9999,0
