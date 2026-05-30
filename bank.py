@@ -29,20 +29,35 @@ def save_users():
 entered_username = input("Enter username: ")
 entered_password = input("Enter password: ")
 
-if entered_username in users:
+import sqlite3
 
-    if users[entered_username]["password"] == entered_password:
+conn = sqlite3.connect("bank.db")
+cursor = conn.cursor()
+
+cursor.execute(
+    "SELECT * FROM users WHERE username = ?",
+    (entered_username,)
+)
+
+user = cursor.fetchone()
+
+if user:
+
+    username = user[0]
+    password = user[1]
+    balance = user[2]
+
+    if password == entered_password:
 
         print("Login successful!")
 
-        balance = users[entered_username]["balance"]
-        transaction_file = f"{entered_username}_transactions.txt"
-
     else:
+
         print("Wrong password.")
         exit()
 
 else:
+
     print("User not found.")
     exit()
 
