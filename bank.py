@@ -89,9 +89,14 @@ while True:
 
         amount = float(input("Enter deposit amount: "))
 
-        users[entered_username]["balance"] += amount
-        balance = users[entered_username]["balance"]
-        save_users()
+        balance += amount
+
+        cursor.execute(
+            "UPDATE users SET balance = ? WHERE username = ?",
+            (balance, entered_username)
+        )
+
+        conn.commit()
         
         transactions.append(f"Deposited: ${amount}")
         with open(transaction_file, "a") as f:
