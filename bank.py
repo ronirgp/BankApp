@@ -185,13 +185,28 @@ while True:
             if amount <= balance:
                 
 
-                users[entered_username]["balance"] -= amount
-                
-                users[receiver]["balance"] += amount
-                
+                balance -= amount
 
-                balance = users[entered_username]["balance"]
-                save_users()
+                cursor.execute(
+                    "UPDATE users SET balance = ? WHERE username = ?",
+                    (balance, entered_username)
+                )
+
+                cursor.execute(
+                    "SELECT balance FROM users WHERE username = ?",
+                    (receiver,)
+                )
+
+                receiver_balance = cursor.fetchone()[0]
+
+                receiver_balance += amount
+
+                cursor.execute(
+                    "UPDATE users SET balance = ? WHERE username = ?",
+                    (receiver_balance, receiver)
+                )
+
+                conn.commit()
 
                 transactions.append(f"Transferred ${amount} to {receiver}")
                 

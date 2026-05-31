@@ -1,6 +1,7 @@
 ----- RECEIPT -----
-User: Ronald
-Transaction: Withdrawal
-Amount: $400.0
-Balance: $1600.0
+Sender: Ronald
+Receiver: Maria
+Transaction: Transfer
+Amount: $100.0
+Balance: $1400.0
 -------------------

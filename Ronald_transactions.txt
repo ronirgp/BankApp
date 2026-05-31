@@ -5,3 +5,5 @@ Deposited $500.0 | Balance: $2000.0
 Withdrew $500.0 | Balance: $1500.0
 Deposited $400.0 | Balance: $2000.0
 Withdrew $400.0 | Balance: $1600.0
+Ronald transferred $100.0 to Maria
+Ronald transferred $100.0 to Maria
