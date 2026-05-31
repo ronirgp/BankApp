@@ -122,9 +122,16 @@ while True:
 
         if amount <= balance:
 
-            users[entered_username]["balance"] -= amount
-            balance = users[entered_username]["balance"]
-            save_users()
+            balance -= amount
+
+            cursor.execute(
+                "UPDATE users SET balance = ? WHERE username = ?",
+                (balance, entered_username)
+
+            )
+
+            conn.commit()
+            
             transactions.append(f"Withdrew: ${amount}")
             
             with open(transaction_file, "a") as f:

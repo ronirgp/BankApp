@@ -1,6 +1,6 @@
 ----- RECEIPT -----
 User: Ronald
-Transaction: Deposit
+Transaction: Withdrawal
 Amount: $400.0
-Balance: $2000.0
+Balance: $1600.0
 -------------------
