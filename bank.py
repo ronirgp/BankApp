@@ -246,12 +246,12 @@ while True:
 
             new_password = input("Create password: ")
 
-            users[new_username] = {
-                "password": new_password,
-                "balance": 0
-                }
+            cursor.execute(
+                "INSERT INTO users VALUES (?, ?, ?)",
+                (new_username, new_password, 0)
+            )
 
-            save_users()
+            conn.commit()
 
             print("\n✅ Account created successfully.")
             
