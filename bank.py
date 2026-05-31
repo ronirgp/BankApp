@@ -26,8 +26,8 @@ def save_users():
 
             file.write(f"{username},{password},{balance}\n")
 
-entered_username = input("Enter username: ")
-entered_password = input("Enter password: ")
+entered_username = input("Enter username: ").strip()
+entered_password = input("Enter password: ").strip()
 
 import sqlite3
 
@@ -176,7 +176,14 @@ while True:
         receiver = input("Enter receiver username: ")
         
 
-        if receiver in users:
+        cursor.execute(
+            "SELECT * FROM users WHERE username = ?",
+            (receiver,)
+        )
+
+        user = cursor.fetchone()
+
+        if user:
             
 
             amount = float(input("Enter transfer amount: "))
@@ -306,15 +313,18 @@ while True:
 
             print("\nRegistered Users:")
 
-            for username in users:
+            
+            cursor.execute("SELECT username FROM users")
 
-                print(username)
+            all_users = cursor.fetchall()
 
-            total_money = 0
+            for user in all_users:
 
-            for username in users:
+                print(user[0])
 
-                total_money += users[username]["balance"]
+            cursor.execute("SELECT SUM(balance) FROM users")
+
+            total_money = cursor.fetchone()[0]
 
             print(f"\nTotal money in bank: ${total_money}")
 
