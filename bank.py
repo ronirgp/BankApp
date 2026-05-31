@@ -255,20 +255,30 @@ while True:
 
             print("\n✅ Account created successfully.")
             
+    
     elif choice == "8":
-        
 
         username_to_delete = input("Enter account username to delete: ")
 
-        if username_to_delete in users:
+        cursor.execute(
+            "SELECT * FROM users WHERE username = ?",
+            (username_to_delete,)
+        )
+
+        user = cursor.fetchone()
+
+        if user:
 
             confirm = input("Type YES to confirm deletion: ")
 
             if confirm == "YES":
 
-                del users[username_to_delete]
+                cursor.execute(
+                    "DELETE FROM users WHERE username = ?",
+                    (username_to_delete,)
+                )
 
-                save_users()
+                conn.commit()
 
                 print("\n✅ Account deleted successfully.")
 
@@ -279,7 +289,6 @@ while True:
         else:
 
             print("\n❌ User not found.")
-            
             
 
     elif choice == "6":
