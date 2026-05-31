@@ -50,6 +50,8 @@ if user:
     if password == entered_password:
 
         print("Login successful!")
+        # per-user transaction log file
+        transaction_file = f"{entered_username}_transactions.txt"
 
     else:
 
