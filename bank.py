@@ -1,6 +1,9 @@
 import json 
+from datetime import datetime
 
 print("Welcome to the Bank")
+
+timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
 transactions = []
 
@@ -103,7 +106,7 @@ while True:
         transactions.append(f"Deposited: ${amount}")
         with open(transaction_file, "a") as f:
 
-            f.write(f"Deposited ${amount} | Balance: ${balance}\n")
+            f.write(f"{timestamp} | Deposited ${amount} | Balance: ${balance}\n")
 
         print("\n✅ Deposit successful.")
         
@@ -135,8 +138,7 @@ while True:
             transactions.append(f"Withdrew: ${amount}")
             
             with open(transaction_file, "a") as f:
-
-                f.write(f"Withdrew ${amount} | Balance: ${balance}\n")
+                f.write(f"{timestamp} | Withdrew ${amount} | Balance: ${balance}\n")
 
             print("\n✅ Withdrawal successful.")
             
@@ -220,7 +222,7 @@ while True:
 
                 with open(transaction_file, "a") as f:
                     
-                    f.write(f"{entered_username} transferred ${amount} to {receiver}\n")
+                    f.write(f"{timestamp} | {entered_username} transferred ${amount} to {receiver}\n")
                     
 
                     print("\n✅ Transfer successful.")

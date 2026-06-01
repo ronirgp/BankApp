@@ -4,3 +4,6 @@ Withdrew $500.0 | Balance: $3000.0
 Deposited $500.0 | Balance: $3500.0
 Maria transferred $500.0 to Carlos
 Maria transferred $100.0 to Ronald
+2026-06-01 13:14:07 | Withdrew $200.0 | Balance: $3000.0
+2026-06-01 13:14:07 | Maria transferred $500.0 to Ronald
+2026-06-01 13:14:07 | Deposited $500.0 | Balance: $3000.0
