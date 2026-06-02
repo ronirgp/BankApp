@@ -103,6 +103,23 @@ while True:
 
         conn.commit()
         
+        cursor.execute(
+            """
+            INSERT INTO transactions
+            (username, date, transaction_type, amount, receiver)
+            VALUES (?, ?, ?, ?, ?)
+            """,
+            (
+                entered_username,
+                timestamp,
+                "Deposit",
+                amount,
+                ""
+            )
+        )
+
+        conn.commit()
+        
         transactions.append(f"Deposited: ${amount}")
         with open(transaction_file, "a") as f:
 
@@ -135,6 +152,23 @@ while True:
 
             conn.commit()
             
+            cursor.execute(
+                """
+                INSERT INTO transactions
+                (username, date, transaction_type, amount, receiver)
+                VALUES (?, ?, ?, ?, ?)
+                """,
+                (
+                    entered_username,
+                    timestamp,
+                    "Withdrawal",
+                    amount,
+                    ""
+                )
+            )
+
+            conn.commit()
+            
             transactions.append(f"Withdrew: ${amount}")
             
             with open(transaction_file, "a") as f:
@@ -152,23 +186,41 @@ while True:
         else:
             print("Insufficient funds.")
 
+    
     elif choice == "4":
 
         print("\n===== TRANSACTION HISTORY =====")
 
-        try:
+        cursor.execute(
+            """
+            SELECT date, transaction_type, amount, receiver
+            FROM transactions
+            WHERE username = ?
+            ORDER BY id
+            """,
+            (entered_username,)
+        )
 
-            with open(transaction_file, "r") as f:
+        history = cursor.fetchall()
 
-                history = f.read()
+        if history:
 
-                if history == "":
-                    print("No transactions yet.")
+            for transaction in history:
+
+                date = transaction[0]
+                transaction_type = transaction[1]
+                amount = transaction[2]
+                receiver = transaction[3]
+
+                if receiver == "":
+
+                    print(f"{date} | {transaction_type} | ${amount}")
 
                 else:
-                    print(history)
 
-        except FileNotFoundError:
+                    print(f"{date} | {transaction_type} | ${amount} | To: {receiver}")
+
+        else:
 
             print("No transactions yet.")
 
@@ -213,6 +265,23 @@ while True:
                 cursor.execute(
                     "UPDATE users SET balance = ? WHERE username = ?",
                     (receiver_balance, receiver)
+                )
+
+                conn.commit()
+                
+                cursor.execute(
+                    """
+                    INSERT INTO transactions
+                    (username, date, transaction_type, amount, receiver)
+                    VALUES (?, ?, ?, ?, ?)
+                    """,
+                    (
+                        entered_username,
+                        timestamp,
+                        "Transfer",
+                        amount,
+                        receiver
+                    )
                 )
 
                 conn.commit()
