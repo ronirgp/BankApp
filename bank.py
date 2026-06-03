@@ -1,4 +1,10 @@
 import json 
+import hashlib
+def hash_password(password):
+
+    return hashlib.sha256(password.encode()).hexdigest()
+
+
 from datetime import datetime
 
 print("Welcome to the Bank")
@@ -50,7 +56,11 @@ if user:
     password = user[1]
     balance = user[2]
 
-    if password == entered_password:
+    if (
+        password == entered_password
+        or
+        password == hash_password(entered_password)
+    ):
 
         print("Login successful!")
         # per-user transaction log file
@@ -323,10 +333,11 @@ while True:
         else:
 
             new_password = input("Create password: ")
+            hashed_password = hash_password(new_password)
 
             cursor.execute(
                 "INSERT INTO users VALUES (?, ?, ?)",
-                (new_username, new_password, 0)
+                (new_username, hashed_password, 0)
             )
 
             conn.commit()
