@@ -108,6 +108,7 @@ while True:
     print("8. Delete Account")
     print("9. Admin Panel")
     print("10. Search User")
+    print("11. Change Password")
     print("==============================")
     
     choice = input("Choose: ")
@@ -566,6 +567,57 @@ while True:
         else:
 
             print("\n❌ Admin only.")
+            
+    elif choice == "11":
+
+        current_password = input("Enter current password: ")
+
+        current_password_hash = hash_password(current_password)
+
+        cursor.execute(
+            """
+            SELECT password
+            FROM users
+            WHERE username = ?
+            """,
+            (entered_username,)
+        )
+
+        stored_password = cursor.fetchone()[0]
+
+        if current_password_hash == stored_password:
+
+            new_password = input("Enter new password: ")
+
+            confirm_password = input("Confirm new password: ")
+
+            if new_password == confirm_password:
+
+                new_password_hash = hash_password(new_password)
+
+                cursor.execute(
+                    """
+                    UPDATE users
+                    SET password = ?
+                    WHERE username = ?
+                    """,
+                    (
+                        new_password_hash,
+                        entered_username
+                    )
+                )
+
+                conn.commit()
+
+                print("\n✅ Password changed successfully.")
+
+            else:
+
+                print("\n❌ Passwords do not match.")
+
+        else:
+
+            print("\n❌ Current password is incorrect.")
 
     else:
 
