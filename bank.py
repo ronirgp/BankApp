@@ -420,6 +420,7 @@ while True:
             print("\nRegistered Users:")
 
             
+            
             cursor.execute(
                 """
                 SELECT username, created_date
@@ -438,7 +439,30 @@ while True:
 
                     created_date = "Unknown"
 
-                print(f"{username} | Created: {created_date}")
+                cursor.execute(
+                    """
+                    SELECT login_time
+                    FROM login_history
+                    WHERE username = ?
+                    ORDER BY id DESC
+                    LIMIT 1
+                    """,
+                    (username,)
+                )
+
+                login = cursor.fetchone()
+
+                if login:
+
+                    last_login = login[0]
+
+                else:
+
+                    last_login = "Never"
+
+                print(
+                    f"{username} | Created: {created_date} | Last Login: {last_login}"
+                )
 
             cursor.execute("SELECT SUM(balance) FROM users")
 
