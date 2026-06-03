@@ -107,6 +107,7 @@ while True:
     print("7. Create New Account")
     print("8. Delete Account")
     print("9. Admin Panel")
+    print("10. Search User")
     print("==============================")
     
     choice = input("Choose: ")
@@ -503,6 +504,68 @@ while True:
         else:
 
             print("\n❌ Access denied. Admin only.")
+            
+    elif choice == "10":
+
+        if entered_username == "admin":
+
+            username_search = input("Enter username: ")
+
+            cursor.execute(
+                """
+                SELECT username, balance, created_date
+                FROM users
+                WHERE username = ?
+                """,
+                (username_search,)
+            )
+
+            user = cursor.fetchone()
+
+            if user:
+
+                username = user[0]
+                balance = user[1]
+                created_date = user[2]
+
+                if created_date is None:
+
+                    created_date = "Unknown"
+
+                cursor.execute(
+                    """
+                    SELECT login_time
+                    FROM login_history
+                    WHERE username = ?
+                    ORDER BY id DESC
+                    LIMIT 1
+                    """,
+                    (username,)
+                )
+
+                login = cursor.fetchone()
+
+                if login:
+
+                    last_login = login[0]
+
+                else:
+
+                    last_login = "Never"
+
+                print("\n===== USER INFO =====")
+                print(f"Username: {username}")
+                print(f"Balance: ${balance}")
+                print(f"Created: {created_date}")
+                print(f"Last Login: {last_login}")
+
+            else:
+
+                print("\n❌ User not found.")
+
+        else:
+
+            print("\n❌ Admin only.")
 
     else:
 
