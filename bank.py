@@ -459,9 +459,22 @@ while True:
                 else:
 
                     last_login = "Never"
+                    
+                    cursor.execute(
+                        """
+                        SELECT balance
+                        FROM users
+                        WHERE username = ?
+                        """,
+                        (username,)
+                    )
+
+                    balance_result = cursor.fetchone()
+
+                    balance = balance_result[0]
 
                 print(
-                    f"{username} | Created: {created_date} | Last Login: {last_login}"
+                    f"{username} | Balance: ${balance} | Created: {created_date} | Last Login: {last_login}"
                 )
 
             cursor.execute("SELECT SUM(balance) FROM users")
