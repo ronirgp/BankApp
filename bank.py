@@ -420,13 +420,25 @@ while True:
             print("\nRegistered Users:")
 
             
-            cursor.execute("SELECT username FROM users")
+            cursor.execute(
+                """
+                SELECT username, created_date
+                FROM users
+                """
+            )
 
             all_users = cursor.fetchall()
 
             for user in all_users:
 
-                print(user[0])
+                username = user[0]
+                created_date = user[1]
+
+                if created_date is None:
+
+                    created_date = "Unknown"
+
+                print(f"{username} | Created: {created_date}")
 
             cursor.execute("SELECT SUM(balance) FROM users")
 
