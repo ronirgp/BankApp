@@ -352,10 +352,17 @@ while True:
             new_password = input("Create password: ")
             hashed_password = hash_password(new_password)
 
+            created_date = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
             cursor.execute(
-                "INSERT INTO users VALUES (?, ?, ?)",
-                (new_username, hashed_password, 0)
+                "INSERT INTO users VALUES (?, ?, ?, ?)",
+            (
+                    new_username,
+                    hashed_password,
+                    0,
+                    created_date
             )
+        )
 
             conn.commit()
 
