@@ -426,6 +426,23 @@ while True:
             total_money = cursor.fetchone()[0]
 
             print(f"\nTotal money in bank: ${total_money}")
+            
+            print("\nRecent Logins:")
+
+            cursor.execute(
+                """
+                SELECT username, login_time
+                FROM login_history
+                ORDER BY id DESC
+                LIMIT 5
+                """
+            )
+
+            recent_logins = cursor.fetchall()
+
+            for login in recent_logins:
+
+                print(f"{login[0]} - {login[1]}")
 
         else:
 
