@@ -109,6 +109,7 @@ while True:
     print("9. Admin Panel")
     print("10. Search User")
     print("11. Change Password")
+    print("12. User Transaction Report")
     print("==============================")
     
     choice = input("Choose: ")
@@ -618,6 +619,59 @@ while True:
         else:
 
             print("\n❌ Current password is incorrect.")
+            
+    elif choice == "12":
+
+        report_user = input("Enter username: ")
+
+        cursor.execute(
+            """
+            SELECT COUNT(*), COALESCE(SUM(amount),0)
+            FROM transactions
+            WHERE username = ?
+            AND transaction_type = 'Deposit'
+            """,
+            (report_user,)
+        )
+
+        deposit_count, total_deposited = cursor.fetchone()
+
+        cursor.execute(
+            """
+            SELECT COUNT(*), COALESCE(SUM(amount),0)
+            FROM transactions
+            WHERE username = ?
+            AND transaction_type = 'Withdrawal'
+            """,
+            (report_user,)
+        )
+
+        withdrawal_count, total_withdrawn = cursor.fetchone()
+
+        cursor.execute(
+            """
+            SELECT COUNT(*), COALESCE(SUM(amount),0)
+            FROM transactions
+            WHERE username = ?
+            AND transaction_type = 'Transfer'
+            """,
+            (report_user,)
+        )
+
+        transfer_count, total_transferred = cursor.fetchone()
+
+        print("\n===== USER TRANSACTION REPORT =====")
+
+        print(f"User: {report_user}")
+
+        print(f"\nDeposits: {deposit_count}")
+        print(f"Total Deposited: ${total_deposited}")
+
+        print(f"\nWithdrawals: {withdrawal_count}")
+        print(f"Total Withdrawn: ${total_withdrawn}")
+
+        print(f"\nTransfers: {transfer_count}")
+        print(f"Total Transferred: ${total_transferred}")
 
     else:
 
