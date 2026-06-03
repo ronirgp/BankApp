@@ -22,6 +22,15 @@ CREATE TABLE IF NOT EXISTS transactions (
     receiver TEXT
 )
 """)
+cursor.execute(
+    """
+    CREATE TABLE IF NOT EXISTS login_history (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        username TEXT,
+        login_time TEXT
+    )
+    """
+)
 
 conn.commit()
 

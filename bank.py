@@ -63,6 +63,23 @@ if user:
     ):
 
         print("Login successful!")
+        
+        login_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
+        cursor.execute(
+            """
+            INSERT INTO login_history
+            (username, login_time)
+            VALUES (?, ?)
+            """,
+            (
+                entered_username,
+                login_time
+            )
+        )
+
+        conn.commit()
+        
         # per-user transaction log file
         transaction_file = f"{entered_username}_transactions.txt"
 
